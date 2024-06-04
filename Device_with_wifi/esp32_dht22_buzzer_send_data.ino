@@ -34,9 +34,9 @@ unsigned long previousBuzzerMillis2 = 0;
 bool buzzerState = false; 
 bool buzzerState2 = false; 
 
-const char* ssid = "Xiaomi 11T";
-const char* password = "12344321";
-const char* serverUrl = "http://192.168.185.238:8000/sensor/receive/";
+const char* ssid = "wifi_name"; // change this to your wifi name 
+const char* password = "wifi_password"; // change this to your wifi password 
+const char* serverUrl = "http://192.168.xxx.xxx:8000/sensor/receive/"; // change this to your local ip address
 
 void setup()
 {
