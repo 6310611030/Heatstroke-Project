@@ -30,7 +30,10 @@ def home(request):
     high_risk = None
     if request.user.is_authenticated:
         high_risk = check_high_risk(request)
-        latest_data = SensorData.objects.filter(user=request.user).latest('timestamp')
+        try:
+            latest_data = SensorData.objects.filter(user=request.user).latest('timestamp')
+        except SensorData.DoesNotExist:
+            latest_data = 0  # Set default value to 0 when no data exists
     else:
         latest_data = None
     context = {'latest_data': latest_data,
@@ -55,10 +58,14 @@ def sign_up(request):
             return redirect('sensor:display_data')
     return render(request, 'users/sign_up.html', {'user_form': user_form, 'userinfo_form': userinfo_form})
 
+@login_required(login_url='/user/login')   
 def latest(request):
     high_risk = None
     if request.user.is_authenticated:
-        latest_data = SensorData.objects.filter(user=request.user).latest('timestamp')
+        try:
+            latest_data = SensorData.objects.filter(user=request.user).latest('timestamp')
+        except SensorData.DoesNotExist:
+            latest_data = None  # Set default value to 0 when no data exists
         high_risk = check_high_risk(request)
     else:
         latest_data = None
