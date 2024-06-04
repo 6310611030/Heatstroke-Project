@@ -1,0 +1,118 @@
+{% extends 'users/layout.html' %} 
+{% load static %} 
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+
+      <!-- about section -->
+
+  <section class="about_section">
+    <div class="container  ">
+      <div class="row">
+        <div class="col-md-6 ">
+          <div class="img-box">
+            <img src="{% static 'user/images/about-img1.jpg' %}" alt="">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                About <span>Project</span>
+              </h2>
+            </div>
+            <p>
+              &emsp;&emsp;Heatstroke is a condition caused by the body's temperature being too high. 
+              It occurs when the body temperature reaches 40 degrees Celsius or more and usually occurs in the summer 
+              or in areas with high relative humidity in the air. It is considered one of the most serious medical emergencies. 
+              and can cause harm to vital organs such as the brain, heart, lungs, kidneys, and muscles. 
+              The onset of heat stroke, the general public cannot know in advance when heatstroke will occur. 
+              This is because there is no notification tool which can lead to death.
+            </p>
+            <p>
+              &emsp;&emsp;This project therefore had an idea to create a heatstroke monitoring and warning system. 
+              to keep track of the body temperature Ambient temperature relative humidity and heart rate to use all this 
+              information to calculate the risk of heatstroke. and notify users and store information in a database on the 
+              website so that those who interested can analyze and use the information.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+
+  <!-- treatment section -->
+
+  <section class="treatment_section layout_padding">
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <div class="box ">
+            <div class="img-box">
+                <img src="{% static 'user/images/icons8-medium-risk-100.png' %}" alt=""> 
+            </div>
+            <div class="detail-box">
+              <h4>
+                Risk Infomation
+              </h4>
+              <p>
+                Infomation about risk and how to calculate risk.
+              </p>
+              <a class="" href="{% url 'users:risk_info' %}"> Risk Infomation</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="box ">
+            <div class="img-box">
+                <img src="{% static 'user/images/icons8-graph-96.png' %}" alt=""> 
+            </div>
+            <div class="detail-box">
+              <h4>
+                Display Data
+              </h4>
+              <p>
+                Display data in graph. Include Temperature, Relative Humidity, Body Temperature, Heart Rate, 
+                Risk, Average Temperature, Average Relative Humidity, Average Body Temperature, Average Heart Rate,
+                Average Risk and Temperature and Body Temperature in the same graph. You can select start date and 
+                end date at the top of page.
+              </p>
+              <a class="" href="{% url 'sensor:display_data' %}"> Display Data</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="box ">
+            <div class="img-box">
+                <img src="{% static 'user/images/icons8-new-100.png' %}" alt=""> 
+            </div>
+            <div class="detail-box">
+              <h4>
+                Latest Data
+              </h4>
+              <p>
+                Display a latest data. Include Temperature, Relative Humidity, Body Temperature, Heart Rate and
+                Risk 
+              </p>
+              <a class="nav-link" href="{% url 'users:latest' %}">Latest Data</a>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- end treatment section -->
+</body>
+</html>
+{% endblock %}
