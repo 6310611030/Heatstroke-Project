@@ -41,7 +41,8 @@ You have to install software before using the project.
     python manage.py createsuperuser
     ```
 
-2. Run Django server in terminal (set listing to 0.0.0.0:8000 for device to connect to the web server)
-    ```sh
-    python manage.py runserver 0.0.0.0:8000
-    ```
+### Device library
+1. SparkFun_MAX3010x_Sensor_Library
+2. DHT-sensor-library by Adafruit
+3. Adafruit-MLX90614-Library
+   
