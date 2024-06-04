@@ -11,13 +11,28 @@ Download [Python](https://www.python.org/downloads/)
     ```
 2. Change directory to the project
     ```sh
-    cd heatstroke_warning_system/heatstroke_warning_system
+    cd Heatstroke/heatstroke_warning_system
     ```
-3. Install requirements for the project
+3. Set Up a Virtual Environment (Optional but Recommended)
+    ```sh
+    python -m venv .venv
+    ```
+4. Activate the virtual environment
+   ```sh
+    .venv\Scripts\activate
+    ```
+5. Install requirements for the project
     ```sh
     pip install -r requirements.txt
     ```
-4. Run Django server in terminal (set listing to 0.0.0.0:8000 for device to connect to the web server)
+
+### Usage
+1. Create a Superuser
+    ```sh
+    python manage.py createsuperuser
+    ```
+
+2. Run Django server in terminal (set listing to 0.0.0.0:8000 for device to connect to the web server)
     ```sh
     python manage.py runserver 0.0.0.0:8000
     ```
