@@ -1,0 +1,46 @@
+{% extends 'users/layout.html' %} 
+{% load static %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <style>
+        .form-control {
+            max-width: 300px;
+            margin: auto;
+        }
+        .create-user-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<div class="create-user-container">
+    <h1>Sign up</h1>
+    <section class="create-user-detail">
+        <form method="post" action="{% url 'users:sign_up' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input class="form-control username" type="text" id="username" name="username" required><br>
+
+            <label for="first_name">First Name:</label>
+            <input class="form-control first" type="text" id="first_name" name="first_name" required>
+
+            <label for="last_name">Last Name:</label>
+            <input class="form-control last" type="text" id="last_name" name="last_name" required><br>
+
+            <label for="email">Email:</label>
+            <input class="form-control email" type="email" id="email" name="email" >
+
+            <label for="password">Password:</label>
+            <input class="form-control password" type="password" id="password" name="password" required><br>
+
+            <button type="submit" class="sign-up-btn">Sign up</button>
+            <br>
+        </form>
+    </section>
+</div>
+</html>
+{% endblock %}

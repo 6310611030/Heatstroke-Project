@@ -22,4 +22,5 @@ urlpatterns = [
     path("user/", include('users.urls', namespace='users')),
     path("sensor/", include('sensor.urls', namespace='sensor')),
     path("", include('users.urls', namespace='users')),
+    
 ]

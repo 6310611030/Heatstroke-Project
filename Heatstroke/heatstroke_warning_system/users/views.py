@@ -6,6 +6,8 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .forms import  UserCreationForm, UserinfoForm
 from django.contrib import messages
+from sensor.models import SensorData
+from sensor.views import check_high_risk
 
 def login_view(request):
     if request.method == 'POST':
@@ -24,11 +26,18 @@ def logout_view(request):
                 'message': 'You are logged out.'
             })
 
-@login_required
 def home(request):
-    return render(request, 'users/home.html')
+    high_risk = None
+    if request.user.is_authenticated:
+        high_risk = check_high_risk(request)
+        latest_data = SensorData.objects.filter(user=request.user).latest('timestamp')
+    else:
+        latest_data = None
+    context = {'latest_data': latest_data,
+               'high_risk': high_risk,}
+    return render(request, 'users/home.html', context)
 
-def create_user(request):
+def sign_up(request):
     if request.method == 'POST':
         user_form = UserCreationForm(request.POST)
         userinfo_form = UserinfoForm(request.POST)
@@ -43,5 +52,21 @@ def create_user(request):
         user_form = UserCreationForm()
         userinfo_form = UserinfoForm()
         if request.user.is_authenticated:
-            return redirect('users:home')
-    return render(request, 'users/create_user.html', {'user_form': user_form, 'userinfo_form': userinfo_form})
+            return redirect('sensor:display_data')
+    return render(request, 'users/sign_up.html', {'user_form': user_form, 'userinfo_form': userinfo_form})
+
+def latest(request):
+    high_risk = None
+    if request.user.is_authenticated:
+        latest_data = SensorData.objects.filter(user=request.user).latest('timestamp')
+        high_risk = check_high_risk(request)
+    else:
+        latest_data = None
+    context = {'latest_data': latest_data,
+               'high_risk': high_risk,}
+    return render(request, 'users/latest.html', context)
+
+
+def risk_info(request):
+
+    return render(request, 'users/risk_info.html')

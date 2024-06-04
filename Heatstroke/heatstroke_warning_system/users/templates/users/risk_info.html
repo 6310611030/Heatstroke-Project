@@ -1,0 +1,307 @@
+{% extends 'users/layout.html' %} 
+{% load static %} 
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Infomation</title>
+    <style>
+        .risk_info_1 {
+            margin: 20px; /* Add margin to the body */
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid #40d2bc;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid black;
+        }
+        th {
+            background-color: #40d2bc;
+            color: #ffffff;
+        }
+        .green {
+            background-color: #6ed64c;
+        }
+        .yellow {
+            background-color: #fce115;
+        }
+        .orange {
+            background-color: #ffa719;
+        }
+        .red {
+            background-color: #ff394a;
+        }
+    </style>
+</head>
+<body>
+    <div class="risk_info_1">
+    <h1>Risk Infomation</h1>
+    <p>This table shows how to calculate risk.</p>
+    <table>
+        <tr>
+            <th>Input</th>
+            <th>Status</th>
+            <th>Data</th>
+            <th>Risk</th>
+        </tr>
+        <tr>
+            <td>Heart Rate (BPM)</td>
+            <td>Normal<br>Moderate<br>High</td>
+            <td>0 - 100<br>101 - 120<br>≥ 121</td>
+            <td>0<br>1<br>2</td>
+        </tr>
+        <tr>
+            <td>Body Temperature (°C)</td>
+            <td>Normal<br>Moderate<br>High<br>Very High</td>
+            <td>35.4 - 37.4<br>37.5 - 38.4<br>38.5 - 39.4<br>≥ 40</td>
+            <td>0<br>1<br>2<br>3</td>
+        </tr>
+        <tr>
+            <td>Heat index</td>
+            <td>Normal<br>Moderate<br>High<br>Very High</td>
+            <td>
+                <span style="background-color: #6ed64c; display: block; height: 25px;"></span>
+                <span style="background-color: #fce115; display: block; height: 25px;"></span>
+                <span style="background-color: #ffa719; display: block; height: 25px;"></span>
+                <span style="background-color: #ff394a; display: block; height: 25px;"></span>
+            </td>
+            <td>0<br>1<br>2<br>3</td>
+        </tr>
+    </table>
+    <h2>Heat Index Table</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">Relative Humidity (%)</th>
+                    <th colspan="16">Ambient Temperature (°C)</th>
+                </tr>
+                <tr>
+                    <th>27°C</th>
+                    <th>28°C</th>
+                    <th>29°C</th>
+                    <th>30°C</th>
+                    <th>31°C</th>
+                    <th>32°C</th>
+                    <th>33°C</th>
+                    <th>34°C</th>
+                    <th>36°C</th>
+                    <th>37°C</th>
+                    <th>38°C</th>
+                    <th>39°C</th>
+                    <th>40°C</th>
+                    <th>41°C</th>
+                    <th>42°C</th>
+                    <th>43°C</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>40%</td>
+                    <td class="green">27</td>
+                    <td class="green">27</td>
+                    <td class="green">28</td>
+                    <td class="green">29</td>
+                    <td class="green">31</td>
+                    <td class="yellow">33</td>
+                    <td class="yellow">34</td>
+                    <td class="yellow">36</td>
+                    <td class="yellow">38</td>
+                    <td class="yellow">41</td>
+                    <td class="orange">43</td>
+                    <td class="orange">46</td>
+                    <td class="orange">48</td>
+                    <td class="orange">51</td>
+                    <td class="red">54</td>
+                    <td class="red">58</td>
+                </tr>
+                <tr>
+                    <td>45%</td>
+                    <td class="green">27</td>
+                    <td class="green">28</td>
+                    <td class="green">29</td>
+                    <td class="green">31</td>
+                    <td class="green">32</td>
+                    <td class="yellow">34</td>
+                    <td class="yellow">36</td>
+                    <td class="yellow">38</td>
+                    <td class="yellow">40</td>
+                    <td class="orange">43</td>
+                    <td class="orange">46</td>
+                    <td class="orange">48</td>
+                    <td class="orange">51</td>
+                    <td class="red">54</td>
+                    <td class="red">58</td>
+                </tr>
+                <tr>
+                    <td>50%</td>
+                    <td class="green">27</td>
+                    <td class="green">28</td>
+                    <td class="green">29</td>
+                    <td class="green">31</td>
+                    <td class="yellow">33</td>
+                    <td class="yellow">35</td>
+                    <td class="yellow">37</td>
+                    <td class="yellow">39</td>
+                    <td class="orange">42</td>
+                    <td class="orange">45</td>
+                    <td class="orange">48</td>
+                    <td class="orange">51</td>
+                    <td class="red">54</td>
+                    <td class="red">58</td>
+                </tr>
+                <tr>
+                    <td>55%</td>
+                    <td class="green">27</td>
+                    <td class="green">29</td>
+                    <td class="green">30</td>
+                    <td class="green">32</td>
+                    <td class="yellow">34</td>
+                    <td class="yellow">36</td>
+                    <td class="yellow">38</td>
+                    <td class="yellow">41</td>
+                    <td class="orange">44</td>
+                    <td class="orange">47</td>
+                    <td class="orange">51</td>
+                    <td class="red">54</td>
+                    <td class="red">58</td>
+                </tr>
+                <tr>
+                    <td>60%</td>
+                    <td class="green">28</td>
+                    <td class="green">29</td>
+                    <td class="green">31</td>
+                    <td class="yellow">33</td>
+                    <td class="yellow">35</td>
+                    <td class="yellow">38</td>
+                    <td class="yellow">41</td>
+                    <td class="orange">43</td>
+                    <td class="orange">47</td>
+                    <td class="orange">51</td>
+                    <td class="red">54</td>
+                    <td class="red">58</td>
+                </tr>
+                <tr>
+                    <td>65%</td>
+                    <td class="green">28</td>
+                    <td class="green">29</td>
+                    <td class="green">32</td>
+                    <td class="yellow">34</td>
+                    <td class="yellow">37</td>
+                    <td class="yellow">39</td>
+                    <td class="orange">42</td>
+                    <td class="orange">46</td>
+                    <td class="orange">49</td>
+                    <td class="red">53</td>
+                    <td class="red">58</td>
+                </tr>
+                <tr>
+                    <td>70%</td>
+                    <td class="green">28</td>
+                    <td class="green">30</td>
+                    <td class="green">32</td>
+                    <td class="yellow">35</td>
+                    <td class="yellow">38</td>
+                    <td class="yellow">41</td>
+                    <td class="orange">44</td>
+                    <td class="orange">48</td>
+                    <td class="red">52</td>
+                    <td class="red">57</td>
+                </tr>
+                <tr>
+                    <td>75%</td>
+                    <td class="green">29</td>
+                    <td class="green">31</td>
+                    <td class="yellow">33</td>
+                    <td class="yellow">36</td>
+                    <td class="yellow">39</td>
+                    <td class="orange">43</td>
+                    <td class="orange">47</td>
+                    <td class="orange">51</td>
+                    <td class="red">56</td>
+                </tr>
+                <tr>
+                    <td>80%</td>
+                    <td class="green">29</td>
+                    <td class="green">32</td>
+                    <td class="yellow">34</td>
+                    <td class="yellow">38</td>
+                    <td class="yellow">41</td>
+                    <td class="orange">45</td>
+                    <td class="orange">49</td>
+                    <td class="red">54</td>
+                </tr>
+                <tr>
+                    <td>85%</td>
+                    <td class="green">29</td>
+                    <td class="green">32</td>
+                    <td class="yellow">36</td>
+                    <td class="yellow">39</td>
+                    <td class="orange">43</td>
+                    <td class="orange">47</td>
+                    <td class="red">52</td>
+                    <td class="red">57</td>
+                </tr>
+                <tr>
+                    <td>90%</td>
+                    <td class="green">30</td>
+                    <td class="yellow">33</td>
+                    <td class="yellow">37</td>
+                    <td class="yellow">41</td>
+                    <td class="orange">45</td>
+                    <td class="orange">50</td>
+                    <td class="red">55</td>
+                </tr>
+                <tr>
+                    <td>95%</td>
+                    <td class="green">30</td>
+                    <td class="yellow">34</td>
+                    <td class="yellow">38</td>
+                    <td class="orange">42</td>
+                    <td class="orange">47</td>
+                    <td class="red">53</td>
+                </tr>
+                <tr>
+                    <td>100%</td>
+                    <td class="green">31</td>
+                    <td class="yellow">35</td>
+                    <td class="yellow">39</td>
+                    <td class="orange">44</td>
+                    <td class="orange">49</td>
+                    <td class="red">56</td>
+                </tr>
+            </tbody>
+        </table>
+    <br>
+    <table>
+        <tr>
+            <th>Output</th>
+            <th>Status</th>
+            <th>Risk</th>
+        </tr>
+        <tr>
+            <td>Heat Stroke Risk</td>
+            <td>Normal<br>Moderate<br>High<br>Very High</td>
+            <td>0 - 2<br>3 - 4<br>5 - 6<br>7 - 8</td>
+        </tr>
+    </table>
+    <br>
+    <p><b>Normal:</b> Individuals in this category have a low risk of heat stroke.<br><br>
+
+        <b>Moderate:</b> Individuals with moderate heat stroke risk may experience some discomfort.
+        <br> It's important for individuals in this category to stay hydrated and take breaks in cool environments when exposed to heat. <br><br>
+        
+        <b>High:</b> Individuals at high risk of heat stroke are more susceptible to heat-related illnesses. 
+        <br> It's crucial for people in this category to take precautions such as staying hydrated, avoiding prolonged exposure to heat, 
+        <br>and seeking shade or air-conditioned environments when possible.<br><br>
+        
+        <b>Very High:</b> This is the highest level of heat stroke risk, indicating a serious threat to health. 
+        <br>People in this category are at significant risk of heat-related illnesses, including heat stroke. Symptoms may include severe dehydration, exhaustion, dizziness, 
+        <br>and confusion. It's essential for individuals in this category to avoid outdoor activities in hot weather, stay in air-conditioned spaces, drink plenty of fluids, 
+        <br>and seek medical attention if they experience symptoms of heat stroke.</p>
+    </div>
+</body>
+{% endblock %}

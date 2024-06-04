@@ -1,0 +1,256 @@
+{% extends 'users/layout.html' %} 
+{% load static %} 
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display data</title>
+    <!-- Include Plotly.js library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Include charts.js -->
+    <script src="{% static 'user/js/charts.js' %}"></script>
+
+    <!-- Include Flatpickr via CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        .display_data {
+            margin: 20px; /* Add margin to the body */
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            gap: 20px; /* Space between grid items */
+        }
+
+        .grid-item {
+            background-color: #f9f9f9; /* Light background color for the plots */
+            padding: 10px; /* Padding around each plot */
+            border: 1px solid #ddd; /* Border around each plot */
+            border-radius: 8px; /* Rounded corners for each plot */
+        }
+    </style>
+</head>
+<body>
+    <div class="display_data">
+    <h1>Display data</h1>
+    <br>
+    <label for="startDate">Start Date:</label>
+    <input type="text" id="startDate" name="startDate" class="datepicker" placeholder="Select start date...">
+    <label for="endDate">End Date:</label>
+    <input type="text" id="endDate" name="endDate" class="datepicker" placeholder="Select end date...">
+
+    <button id="applyDateRange">Apply</button>
+    <button id="applyToday">1 Day</button>
+    <button id="applyThisWeek">7 Days</button>  
+
+    <div class="grid-container">
+        <div class="grid-item">
+            <h2>Environment Temperature</h2>
+            <div id="temperaturePlot"></div>
+            {% for data in daily_averages %}
+            <p>Average Environment Temperature  {{ data.avg_temperature |floatformat:"2" }} °C</p>
+            {% endfor %}
+        </div>
+        <div class="grid-item">
+            <h2>Relative Humidity</h2>
+            <div id="humidityPlot"></div>
+            {% for data in daily_averages %}
+            <p>Average Humidity  {{ data.avg_humidity |floatformat:"2" }} %</p>
+            {% endfor %}
+        </div>
+        <div class="grid-item">
+            <h2>Body Temperature</h2>
+            <div id="bodyTempPlot"></div>
+            {% for data in daily_averages %}
+            <p>Average Body Temperature   {{ data.avg_body_temp |floatformat:"2" }} °C</p>
+            {% endfor %}
+        </div>
+        <div class="grid-item">
+            <h2>Heart Rate</h2> 
+            <div id="heartRatePlot"></div>
+            {% for data in daily_averages %}
+            <p>Average Heart Rate  {{ data.avg_heart_rate |floatformat:"2" }} bpm</p>
+            {% endfor %}
+        </div>
+        <div class="grid-item">
+            <h2>Risk</h2> 
+            <div id="riskPlot"></div>
+            {% for data in daily_averages %}
+            <p>Average Risk {{ data.avg_risk |floatformat:"2" }}</p>
+            {% endfor %}
+        </div>
+        <div class="grid-item">
+            <h2>Environment Temperature and Body Temperature</h2>
+            <div id="combinedTempPlot"></div>
+        </div>
+        <div class="grid-item">
+            <h2>All Plot</h2>
+            <div id="allPlot"></div>
+        </div>
+    <script>
+        // Environment Temperature plot
+        createLinePlot(
+            'temperaturePlot', 
+            {{ timestamps|safe }}, 
+            {{ temperatures|safe }}, 
+            'Time', 
+            'Temperature (°C)', 
+            'Environment Temperature'
+        );
+
+        // Humidity plot
+        createLinePlot(
+            'humidityPlot', 
+            {{ timestamps|safe }}, 
+            {{ humidity_values|safe }}, 
+            'Time', 
+            'Humidity (%)', 
+            'Humidity'
+        );
+
+        // Body Temperature plot
+        createLinePlot(
+            'bodyTempPlot', 
+            {{ timestamps|safe }}, 
+            {{ body_temps|safe }}, 
+            'Time', 
+            'Body Temperature (°C)', 
+            'Body Temperature'
+        );
+
+        // Heart Rate plot
+        createLinePlot(
+            'heartRatePlot', 
+            {{ timestamps|safe }}, 
+            {{ heart_rates|safe }}, 
+            'Time', 
+            'Heart Rate (bpm)', 
+            'Heart Rate'
+        );
+
+        var trace = {
+        x: {{ timestamps|safe }},
+        y: {{ risks|safe }},
+        mode: 'lines+markers',
+        type: 'scatter'
+        };
+
+        var layout = {
+            title: 'Risk',
+            xaxis: {
+                title: 'Time'
+            },
+            yaxis: {
+                title: 'Risk',
+                range: [0, 8],
+                fixedrange: true
+            },
+
+            shapes: [
+                {
+                    type: 'rect',
+                    xref: 'paper',
+                    yref: 'y',
+                    x0: 0,
+                    y0: 0,
+                    x1: 1,
+                    y1: 2,
+                    fillcolor: 'green',
+                    opacity: 0.3,
+                    line: {
+                        width: 0
+                    }
+                },
+                {
+                    type: 'rect',
+                    xref: 'paper',
+                    yref: 'y',
+                    x0: 0,
+                    y0: 2,
+                    x1: 1,
+                    y1: 4,
+                    fillcolor: 'yellow',
+                    opacity: 0.3,
+                    line: {
+                        width: 0
+                    }
+                },
+                {
+                    type: 'rect',
+                    xref: 'paper',
+                    yref: 'y',
+                    x0: 0,
+                    y0: 4,
+                    x1: 1,
+                    y1: 6,
+                    fillcolor: 'orange',
+                    opacity: 0.3,
+                    line: {
+                        width: 0
+                    }
+                },
+                {
+                    type: 'rect',
+                    xref: 'paper',
+                    yref: 'y',
+                    x0: 0,
+                    y0: 6,
+                    x1: 1,
+                    y1: 8,
+                    fillcolor: 'red',
+                    opacity: 0.3,
+                    line: {
+                        width: 0
+                    }
+                }
+            ]
+            
+        };
+
+        Plotly.newPlot(riskPlot, [trace], layout);
+
+
+        var combinedData = {{ combined_plot|safe }};
+        Plotly.newPlot('combinedTempPlot', combinedData);
+
+        var allData = {{ all_plot|safe }};
+        Plotly.newPlot('allPlot', allData);
+
+        flatpickr(".datepicker", {
+            dateFormat: "Y-m-d"
+        });
+
+        // Function to handle apply button click event
+        document.getElementById("applyToday").addEventListener("click", function() {
+        var today = new Date();
+        var formattedDate = today.getFullYear() + "-" + ('0' + (today.getMonth() + 1)).slice(-2) + "-" + ('0' + today.getDate()).slice(-2);
+
+        window.location.href = window.location.pathname + "?startDate=" + formattedDate + "&endDate=" + formattedDate;
+    });
+
+    // Function to handle apply button click event for This Week
+    document.getElementById("applyThisWeek").addEventListener("click", function() {
+        var today = new Date();
+        var sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
+        var formattedStartDate = sevenDaysAgo.getFullYear() + "-" + ('0' + (sevenDaysAgo.getMonth() + 1)).slice(-2) + "-" + ('0' + sevenDaysAgo.getDate()).slice(-2);
+        var formattedEndDate = today.getFullYear() + "-" + ('0' + (today.getMonth() + 1)).slice(-2) + "-" + ('0' + today.getDate()).slice(-2);
+
+        window.location.href = window.location.pathname + "?startDate=" + formattedStartDate + "&endDate=" + formattedEndDate;
+    });
+
+
+    // Function to handle apply button click event for applying date range
+    document.getElementById("applyDateRange").addEventListener("click", function() {
+        var startDate = document.getElementById("startDate").value;
+        var endDate = document.getElementById("endDate").value;
+
+        // Redirect to the same page with selected dates as query parameters
+        window.location.href = window.location.pathname + "?startDate=" + startDate + "&endDate=" + endDate;
+    });
+    </script>
+    </div>
+</body>
+</html>
+{% endblock %}

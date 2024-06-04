@@ -1,0 +1,34 @@
+{% extends 'users/layout.html' %} 
+{% load static %} 
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Latest Data</title>
+    <style>
+        .latest_data {
+            margin: 20px; /* Add margin to the body */
+        }
+    </style>
+</head>
+<body>
+    <div class="latest_data">
+    <h1>Latest Data</h1>
+    
+    {% if latest_data %}
+        <h3>Recorded Time: {{ latest_data.timestamp }}</h3>
+        <ul>
+            <li>Temperature: {{ latest_data.temperature }} °C</li>
+            <li>Relative Humidity: {{ latest_data.humidity }} %</li>
+            <li>Body Temperature: {{ latest_data.body_temp }} °C</li>
+            <li>Heart rate: {{ latest_data.heart_rate }} BPM</li>
+            <li>Risk: {{ latest_data.risk }}</li>
+        </ul>
+    {% else %}
+        <p><a href="{% url 'users:login' %}">Login</a> to see the latest data.</p>
+    {% endif %}
+    </div>  
+</body>
+</html>
+{% endblock %}
