@@ -32,6 +32,10 @@ You have to install software before using the project.
     ```
 
 ### Usage
+1. Migrate 
+    ```sh
+    python manage.py migrate 
+    ```
 1. Create a Superuser
     ```sh
     python manage.py createsuperuser
