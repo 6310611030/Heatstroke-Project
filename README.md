@@ -1,7 +1,8 @@
 # Heatstroke-Project
 ## Getting Started
 You have to install software before using the project.
-Download [Python](https://www.python.org/downloads/)
+1. Download [Python](https://www.python.org/downloads/)
+2. Install [Visual Studio Code](https://code.visualstudio.com/download)
 
 
 ### Installation
@@ -9,19 +10,23 @@ Download [Python](https://www.python.org/downloads/)
     ```sh
     git clone https://github.com/6310611030/Heatstroke-Project
     ```
-2. Change directory to the project
-    ```sh
-    cd Heatstroke/heatstroke_warning_system
+2. Open the dirctory with Visual Studio Code
+   ```sh
+    code .
     ```
-3. Set Up a Virtual Environment (Optional but Recommended)
+3. Change directory to the project
+    ```sh
+    cd Heatstroke-Project/Heatstroke/heatstroke_warning_system
+    ```
+4. Set Up a Virtual Environment (Optional but Recommended)
     ```sh
     python -m venv .venv
     ```
-4. Activate the virtual environment
+5. Activate the virtual environment
    ```sh
     .venv\Scripts\activate
     ```
-5. Install requirements for the project
+6. Install requirements for the project
     ```sh
     pip install -r requirements.txt
     ```
